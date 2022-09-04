@@ -8,7 +8,7 @@ import SignUp from './pages/SignUp';
 import Login from './pages/Login';
 import VerifyPin from './pages/VerifyPin'
 import PhoneNumber from './pages/PhoneNumber';
-import Home from './pages/Home';
+import Tabs from './pages/Tabs';
 
 
 export default function App() {
@@ -23,7 +23,7 @@ export default function App() {
             <Stack.Screen name='Login' component={Login}/>
             <Stack.Screen name='PhoneNumber' component={PhoneNumber}/>
             <Stack.Screen name='VerifyPin' component={VerifyPin}/>
-            <Stack.Screen name='Home' component={Home}/>
+            <Stack.Screen name='Tabs' component={Tabs}/>
           </Stack.Navigator>
         </NavigationContainer>
      
