@@ -7,7 +7,7 @@ const Message = () => {
     <SafeAreaProvider>
       <SafeAreaView>
           <View>
-            <Text>Message</Text>
+     
           </View>
       </SafeAreaView>
     </SafeAreaProvider>

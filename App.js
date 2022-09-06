@@ -9,6 +9,7 @@ import Login from './pages/Login';
 import VerifyPin from './pages/VerifyPin'
 import PhoneNumber from './pages/PhoneNumber';
 import Tabs from './pages/Tabs';
+import CourseView from './pages/CourseView';
 
 
 export default function App() {
@@ -24,6 +25,7 @@ export default function App() {
             <Stack.Screen name='PhoneNumber' component={PhoneNumber}/>
             <Stack.Screen name='VerifyPin' component={VerifyPin}/>
             <Stack.Screen name='Tabs' component={Tabs}/>
+            <Stack.Screen name='CourseView' component={CourseView}/>
           </Stack.Navigator>
         </NavigationContainer>
      

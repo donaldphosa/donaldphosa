@@ -6,9 +6,6 @@ import { TextInput } from 'react-native-gesture-handler';
 
 const PhoneNumber = ({navigation}) => {
     const [done,setDone] = useState(false)
-    const [second,setSecond] = useState(false)
-    const [third,setThird] = useState(false)
-    const [forth,setForth] = useState(false)
     if(done){
         return <Model navigation={navigation} setDone={setDone}/>
     }
