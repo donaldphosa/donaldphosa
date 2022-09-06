@@ -9,26 +9,26 @@ const PhoneNumber = ({navigation}) => {
     <SafeAreaProvider>
         <SafeAreaView>
 
-    <ScrollView >
-        <View style={styles.container}>
+            <ScrollView >
+                <View style={styles.container}>
 
-        <View style={styles.heading}>
-            <Ionicons name="eye-off" size={18} color="#1F1F39" />
-            <Text style={{color:'#1F1F39',fontWeight:'600',fontSize:18}}>Continue with Phone</Text>
-            <Text></Text>
-        </View>
-        <Image style={styles.illustran} source={require('../assets/images/illustration2.png')} />
-        <View style={styles.bottomPart}>
-            <Text style={styles.phoneRequest}>Enter Your Phone Number</Text>
-            <View style={styles.numInput}>
-            <TextInput style={styles.numField} keyboardType='numeric' placeholderTextColor={'#1F1F39'} placeholder='Number'/>
-            <Pressable onPress={()=>navigation.navigate('VerifyPin')} style={styles.button}>
-                <Text style={{color:'#ffff',fontWeight:'600',fontSize:16}}>Continue</Text>
-            </Pressable>
-            </View>
-        </View>
-        </View>
-    </ScrollView>
+                <View style={styles.heading}>
+                    <Ionicons name="eye-off" size={18} color="#1F1F39" />
+                    <Text style={{color:'#1F1F39',fontWeight:'600',fontSize:18}}>Continue with Phone</Text>
+                    <Text></Text>
+                </View>
+                <Image style={styles.illustran} source={require('../assets/images/illustration2.png')} />
+                <View style={styles.bottomPart}>
+                    <Text style={styles.phoneRequest}>Enter Your Phone Number</Text>
+                    <View style={styles.numInput}>
+                    <TextInput style={styles.numField} keyboardType='numeric' placeholderTextColor={'#1F1F39'} placeholder='Number'/>
+                    <Pressable onPress={()=>navigation.navigate('VerifyPin')} style={styles.button}>
+                        <Text style={{color:'#ffff',fontWeight:'600',fontSize:16}}>Continue</Text>
+                    </Pressable>
+                    </View>
+                </View>
+                </View>
+            </ScrollView>
         </SafeAreaView>
 </SafeAreaProvider>
   )

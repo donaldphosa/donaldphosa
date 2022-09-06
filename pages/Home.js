@@ -11,17 +11,7 @@ const Home = () => {
 <SafeAreaProvider>
     <SafeAreaView>
         <View style={styles.container}>
-          <View style={styles.floating}>
-              <View style={styles.topView}>
-                <Text style={{color:'#858597',fontSize:12}}>Learned today</Text>
-                <Text style={{color:'#3D5CFF',fontSize:12}}>My course</Text>
-              </View>
-              <Text style={{color:'#1F1F39',fontWeight:'bold',fontSize:20}}>46min<Text style={{color:'#858597',fontSize:10}}>/60min</Text></Text>
-              <View style={styles.track}>
-                <LinearGradient start={{x:0,y:1}} end={{x:0.8,y:0.2}} style={[styles.bar,{width:`${progress}%`}]} colors={['#ffffff','red']}>
-                </LinearGradient>
-              </View>
-          </View>
+         
           <View style={styles.profile}>
             <View>
               <Text style={styles.Greet}>Hi, Donald</Text>
@@ -32,9 +22,9 @@ const Home = () => {
             </View>
           </View>
             <View style={styles.bottomContainer}>
-              <View style={{height:'100%',position:'absolute',bottom:0}}>
+          
             <ScrollView  style={{paddingHorizontal:15,zIndex:15}} showsVerticalScrollIndicator={false} stickyHeaderIndices={[1]}>
-                <ScrollView showsHorizontalScrollIndicator={false} style={{marginTop:'20%'}} horizontal={true}>
+                <ScrollView showsHorizontalScrollIndicator={false} horizontal={true}>
                  <Card/>
                  <Card/>
                 </ScrollView>
@@ -48,7 +38,7 @@ const Home = () => {
                 </ScrollView>
                 </View>
                 </View>
-            </View>
+           
        
     </SafeAreaView>
 </SafeAreaProvider>
@@ -102,6 +92,9 @@ const styles = StyleSheet.create({
     backgroundColor:'#FFFFFF',
     position:'absolute',
     bottom:0,
+    borderTopLeftRadius:15,
+    borderTopRightRadius:15,
+    paddingTop:15
   
   },
   profile:{

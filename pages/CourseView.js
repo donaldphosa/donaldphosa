@@ -117,10 +117,10 @@ const styles = StyleSheet.create({
         borderTopLeftRadius:20,
         position:'absolute',
         bottom:0,
-        padding:10
+        padding:5
     },
     upperPart:{
-        padding:10,
+        padding:5,
         justifyContent:'space-between',
         flexDirection:'row',
         alignItems:'center',

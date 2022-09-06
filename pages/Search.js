@@ -115,7 +115,6 @@ const Results = ({setFilter,navigation}) =>{
             <Ionicons name="search" size={18} color="#B8B8D2" />
             <TextInput style={styles.searchField} placeholder='Find Course'/>
             <Pressable onPress={()=>setFilter(true)}>
-
               <Image style={{width:21,height:21}} source={require('../assets/images/Vector.png')} />
             </Pressable>
           </View>
