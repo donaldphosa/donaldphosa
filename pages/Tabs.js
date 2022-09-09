@@ -14,12 +14,12 @@ const Tabs = () => {
   const Tab = createBottomTabNavigator()
   return (
     <Tab.Navigator 
-      initialRouteName='Homes' 
+      // initialRouteName='Homes' 
       screenOptions={{
         headerShown:false,
         tabBarShowLabel:true,
         tabBarStyle:{
-          paddingHorizontal:30,
+          paddingHorizontal:0,
           height:70,
           alignItems:'center',
           paddingBottom:10,

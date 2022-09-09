@@ -21,7 +21,7 @@ const Search = ({navigation}) => {
    const [filter,setFilter] = useState(false)
   const [initial,setInitial] = useState(100)
   const [toValue,setToValue] = useState(2000)
-  if(!filter){
+  if(filter){
     return(
       <Results navigation={navigation} setFilter={setFilter}/>
     );
@@ -34,7 +34,9 @@ const Search = ({navigation}) => {
           <View style={styles.content}>
             <ScrollView showsVerticalScrollIndicator={false}>
             <View style={styles.header}>
-              <Ionicons name="close" size={24} color="#1F1F39" /> 
+              <Pressable onPress={()=>setFilter(true)}>
+                <Ionicons name="close" size={24} color="#1F1F39" /> 
+              </Pressable>
               <Text style={{fontSize:18,fontWeight:'bold',color:'#1F1F39'}}>Search Filter</Text>
               <Text></Text>
             </View>
@@ -84,10 +86,10 @@ const Search = ({navigation}) => {
                     </View></Pressable>)}
                 />
                 <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:10}}>
-                  <Pressable onPress={()=>setFilter(false)} style={styles.clearBtn}>
+                  <Pressable onPress={()=>setFilter(true)} style={styles.clearBtn}>
                     <Text style={{color:'#3D5CFF',fontSize:16,fontWeight:'700'}}>Clear</Text>
                   </Pressable>
-                  <Pressable onPress={()=>setFilter(false)} style={styles.applyBtn}>
+                  <Pressable onPress={()=>setFilter(true)} style={styles.applyBtn}>
                     <Text style={{color:'#ffffff',fontSize:16,fontWeight:'700'}}>Apply Filter</Text>
                   </Pressable>
                 </View>
@@ -114,7 +116,7 @@ const Results = ({setFilter,navigation}) =>{
           <View style={styles.search}>
             <Ionicons name="search" size={18} color="#B8B8D2" />
             <TextInput style={styles.searchField} placeholder='Find Course'/>
-            <Pressable onPress={()=>setFilter(true)}>
+            <Pressable onPress={()=>setFilter(false)}>
               <Image style={{width:21,height:21}} source={require('../assets/images/Vector.png')} />
             </Pressable>
           </View>

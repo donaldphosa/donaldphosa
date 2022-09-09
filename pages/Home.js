@@ -1,12 +1,11 @@
-import { Alert, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View, Pressable } from 'react-native'
+import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View, Pressable } from 'react-native'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-import { LinearGradient } from 'expo-linear-gradient';
 import React, { useState } from 'react'
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 
 const Home = () => {
-  const [progress,setProgress] = useState(80)
+  const [index,setIndex]=useState(1)
   return (
 <SafeAreaProvider>
     <SafeAreaView>
@@ -23,21 +22,46 @@ const Home = () => {
           </View>
             <View style={styles.bottomContainer}>
           
-            <ScrollView  style={{paddingHorizontal:15,zIndex:15}} showsVerticalScrollIndicator={false} stickyHeaderIndices={[1]}>
+      <ScrollView  style={{paddingHorizontal:15,zIndex:15}} showsVerticalScrollIndicator={false}>
+            <View style={{paddingVertical:10}}>
                 <ScrollView showsHorizontalScrollIndicator={false} horizontal={true}>
-                 <Card/>
-                 <Card/>
+                    <Card/>
+                    <Card/>
                 </ScrollView>
-                <View style={{paddingVertical:15,backgroundColor:'#fff',shadowOpacity: 0.15}}>
-                <Text style={{fontSize:18,fontWeight:'600',color:'#1F1F39',marginVertical:10,backgroundColor:'#fff',zIndex:20}}>Enrolled Courses</Text>
-                </View>
-                  <PlanContainer title={'React Native'} progress={progress}/>
-                  <PlanContainer title={'JavaScript for beginners'} progress={progress}/>
-                  <PlanContainer title={'HTML and CSS '} progress={progress}/>
-                  
-                </ScrollView>
-                </View>
-                </View>
+              </View>
+            <Text style={{color:'#1F1F39',fontSize:18,fontWeight:'600',marginVertical:18}}>Chose course</Text>
+
+                 {/* ----------------------filters ------------------------------- */}
+
+          <View style={styles.filters}>
+            <Pressable onPress={()=>setIndex(1)}>
+              <View style={[styles.filterCont,index===1?{backgroundColor:'#3D5CFF'}:{backgroundColor:'transparent'}]}>
+                <Text style={[styles.text , index===1?{color:'#ffffff'}:{}]}>All</Text>
+              </View>
+            </Pressable>
+            <Pressable onPress={()=>setIndex(2)}>
+              <View style={[styles.filterCont,index===2?{backgroundColor:'#3D5CFF'}:{backgroundColor:'transparent'}]}>
+                <Text style={[styles.text , index===2?{color:'#ffffff'}:{}]}>Popular</Text>
+              </View>
+            </Pressable>
+            <Pressable onPress={()=>setIndex(3)}>
+              <View style={[styles.filterCont,index===3?{backgroundColor:'#3D5CFF'}:{backgroundColor:'transparent'}]}>
+                <Text style={[styles.text , index===3?{color:'#ffffff'}:{}]}>New</Text>
+              </View>
+            </Pressable>
+            </View> 
+
+            <View style={{height:'60%',marginTop:10}}>
+              <Courses/>
+              <Courses/>
+              <Courses/>
+              <Courses/>
+              <Courses/>
+              <Courses/>
+          </View>       
+      </ScrollView>
+          </View>
+      </View>
            
        
     </SafeAreaView>
@@ -61,23 +85,28 @@ const Card = ()=>{
   );
 }
 
-const PlanContainer = ({ func, backgroundColor,progress,title})=>{
-  return<Pressable onPress={func}>
-      <View style={[styles.wrapper,{backgroundColor:backgroundColor?backgroundColor:'#ffffff'}]}>
-        <View style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
-          <View >
-            <Text style={{color:'#440687',fontSize:25,fontWeight:'600',marginBottom:10}}>{title}</Text>
-            <Text style={{color:'#1F1F39',fontSize:14,fontWeight:'800',marginBottom:10}}>24/30 lessons</Text>
+const Courses = () =>{
+  return(
+    <View style={styles.CourseContainer}>
+      <View style={styles.imageContainer}>
+        <Image resizeMode='cover' style={styles.image} source={{uri:'https://th.bing.com/th/id/OIP.voawJ6Ch_K82x42SBSmJQQHaHb?pid=ImgDet&w=150&h=151&c=7'}}/>
+      </View>
+        <View style={styles.courseDetails}>
+          <Text style={{color:'#1F1F39',fontSize:14,fontWeight:'700'}}>React v.16.0.5</Text>
+          <View style={styles.writer}>
+          <Ionicons name="person" size={12} color="#B8B8D2" />
+          <Text style={{color:'#B8B8D2',fontSize:14,fontWeight:'400',marginLeft:3}}>Shake Spear</Text>
           </View>
-          <View style={styles.vidIcon}>
-                <Ionicons name='play' size={26} color={'#FFFFFF'}/>
-            </View>
-      </View>
-      <LinearGradient start={{x:0,y:1}} end={{x:0.8,y:0.2}} style={[styles.bar,{width:`${progress}%`}]} colors={['red','orange','green']}>
-                </LinearGradient>
-      </View>
-  </Pressable>
+          <View style={styles.priceContainer}>
+            <Text style={{color:'#3D5CFF',fontSize:16,fontWeight:'bold'}}>$190</Text>
+            <Text style={{backgroundColor:'#FFEBF0',color:'#FF6905',fontSize:14,marginLeft:5,padding:2,borderRadius:20}}>16 hours</Text>
+          </View>
+        </View>
+        <Text></Text>
+    </View>
+  );
 }
+
 
 const styles = StyleSheet.create({
   container:{
@@ -121,46 +150,16 @@ const styles = StyleSheet.create({
     fontSize:14,
     color:'#FFFFFF'
   },
-  floating:{
-    width:335,
-    height:'15%',
-    backgroundColor:'#FFFFFF',
-    position:'absolute',
-    top:"19%",
-    shadowOpacity: 0.15,
-    elevation: 5,
-    zIndex:99,
-    borderRadius:15,
-    padding:15,
-    gap:5
-  },
-  topView:{
-    alignItems:'center',
-    justifyContent:'space-between',
-    flexDirection:'row'
-  },
-  track:{
-    width:'100%',
-    backgroundColor:'#F4F7FD',
-    height:7,
-    marginTop:10,
-    borderRadius:10,
-    overflow:'hidden'
-  },
-  bar:{
-    height:'100%',
-    borderRadius:10,
-    height:8
-  },
+ 
   card:{
     width:253,
-    height:'100%',
+    height:140,
     borderRadius:15,
     backgroundColor:'#CEECFE',
     marginRight:10,
-    padding:28,
+    padding:10,
     justifyContent:'space-between',
-    marginBottom:10
+   
   },
   cardText:{
     fontWeight:'bold',
@@ -175,24 +174,60 @@ const styles = StyleSheet.create({
     height:31,
     borderRadius:5
   },
-  wrapper:{
-      width:'100%',
-      height:110,
-      borderRadius:15,
-      shadowOpacity: 0.55,
-      elevation: 10,
-      backgroundColor:'#ffffff',
-      marginVertical:5,
-      padding:10,
-      shadowColor:'gray',
-      
-  },
-  vidIcon:{
-    backgroundColor:'#3D5CFF',
-    width:44,
-    height:44,
-    borderRadius:100,
-    alignItems:'center',
-    justifyContent:'center'
+  
+
+filters:{
+  alignItems:'center',
+  flexDirection:'row',
+  justifyContent:'space-between',
+  width:'80%'
+},
+filterCont:{
+  alignItems:'center',
+  justifyContent:'center',
+  width:73,
+  height:28,
+  borderRadius:100
+},
+text:{
+  color:'#858597',
+  fontSize:14
+},
+CourseContainer:{
+  width:'100%',
+  height:100,
+  backgroundColor:'#ffffff',
+  marginBottom:15,
+  borderRadius:15,
+  shadowOpacity: 1,
+  shadowColor:'gray',
+  elevation: 5,
+  flexDirection:'row',
+  alignItems:'center',
+  padding:10,
+  justifyContent:'space-between'
+},
+image:{
+  width:'110%',
+  height:'110%',
+},
+imageContainer:{
+  width:70,
+  height:70,
+  borderRadius:10,
+  overflow:'hidden'
+},
+courseDetails:{
+  width:'60%',
+  
+},
+writer:{
+  flexDirection:'row',
+  alignItems:'center',
+  marginVertical:3
+},
+priceContainer:{
+  flexDirection:'row',
+  alignItems:'center'
 }
 })

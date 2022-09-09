@@ -1,55 +1,31 @@
-import { Image, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native'
+import { Image, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import React from 'react'
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useState } from 'react';
+import { LinearGradient } from 'expo-linear-gradient';
+
 
 
 const Course = () => {
-  const [index,setIndex]=useState(1)
+  const [enrolledCourse,setEnrolledCourses] = useState([])
+  const [progress,setProgress] = useState(80)
   return (
   <SafeAreaProvider>
     <SafeAreaView>
         <View style={styles.container}>
           <View style={styles.header}>
-            <Text style={{color:'#1F1F39',fontSize:24,fontWeight:'bold'}}>Course</Text>
+            <Text style={{color:'#1F1F39',fontSize:24,fontWeight:'bold'}}>Enrolled Course</Text>
             <View style={styles.profilePic}>
               <Image source={require('../assets/images/avater.png')} />
             </View>
           </View>
-          <View style={styles.search}>
-            <Ionicons name="search" size={18} color="#B8B8D2" />
-            <TextInput style={styles.searchField} placeholder='Find Course'/>
-            <Image style={{width:21,height:21}} source={require('../assets/images/Vector.png')} />
-          </View>
-          <Text style={{color:'#1F1F39',fontSize:18,fontWeight:'600',marginVertical:18}}>Chose your course</Text>
-          <View style={styles.filters}>
-            <Pressable onPress={()=>setIndex(1)}>
-            <View style={[styles.filterCont,index===1?{backgroundColor:'#3D5CFF'}:{backgroundColor:'transparent'}]}>
-              <Text style={[styles.text , index===1?{color:'#ffffff'}:{}]}>All</Text>
-            </View>
-            </Pressable>
-            <Pressable onPress={()=>setIndex(2)}>
-            <View style={[styles.filterCont,index===2?{backgroundColor:'#3D5CFF'}:{backgroundColor:'transparent'}]}>
-              <Text style={[styles.text , index===2?{color:'#ffffff'}:{}]}>Popular</Text>
-            </View>
-            </Pressable>
-            <Pressable onPress={()=>setIndex(3)}>
-            <View style={[styles.filterCont,index===3?{backgroundColor:'#3D5CFF'}:{backgroundColor:'transparent'}]}>
-              <Text style={[styles.text , index===3?{color:'#ffffff'}:{}]}>New</Text>
-            </View>
-            </Pressable>
-            </View> 
-          <View style={{height:'60%',marginTop:10}}>
-          <ScrollView showsVerticalScrollIndicator={false}>
-            <Courses/>
-            <Courses/>
-            <Courses/>
-            <Courses/>
-            <Courses/>
-            <Courses/>
-          </ScrollView>
-        </View>       
+        
+         <SafeAreaView>
+         <ScrollView>
+          {enrolledCourse.length>0?<PlanContainer title={'React Native'} progress={progress}/>:<NoEnrolledCourseModel/>}
+         </ScrollView>
+         </SafeAreaView>
         </View>
     </SafeAreaView>
   </SafeAreaProvider>
@@ -58,26 +34,34 @@ const Course = () => {
 
 export default Course
 
-const Courses = () =>{
-  return(
-    <View style={styles.CourseContainer}>
-      <View style={styles.imageContainer}>
-        <Image resizeMode='cover' style={styles.image} source={{uri:'https://th.bing.com/th/id/OIP.voawJ6Ch_K82x42SBSmJQQHaHb?pid=ImgDet&w=150&h=151&c=7'}}/>
+
+
+const NoEnrolledCourseModel = () =>{
+  return<View style={styles.messageModelContainer}>
+      <Image style={{width:200,height:200}} source={require('../assets/images/Illustration4.png')}/>
+      <Text style={{color:'#1F1F39',fontSize:16,fontWeight:'700',marginVertical:10}}>No Course Enrolled</Text>
+      <Text style={{color:'#B8B8D2',fontSize:12,fontWeight:'500',marginVertical:5,textAlign:'center'}}>Your courses will appear here once you enroll</Text>
+  </View>
+}
+
+const PlanContainer = ({ func,progress,title})=>{
+  return<Pressable onPress={func}>
+      <View style={styles.wrapper}>
+        <View style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
+          <View >
+            <Text style={{color:'#440687',fontSize:25,fontWeight:'600',marginBottom:10}}>{title}</Text>
+            <Text style={{color:'#1F1F39',fontSize:14,fontWeight:'800',marginBottom:10}}>24/30 lessons</Text>
+          </View>
+          <View style={styles.vidIcon}>
+                <Ionicons name='play' size={26} color={'#FFFFFF'}/>
+            </View>
       </View>
-        <View style={styles.courseDetails}>
-          <Text style={{color:'#1F1F39',fontSize:14,fontWeight:'700'}}>React v.16.0.5</Text>
-          <View style={styles.writer}>
-          <Ionicons name="person" size={12} color="#B8B8D2" />
-          <Text style={{color:'#B8B8D2',fontSize:14,fontWeight:'400',marginLeft:3}}>Shake Spear</Text>
-          </View>
-          <View style={styles.priceContainer}>
-            <Text style={{color:'#3D5CFF',fontSize:16,fontWeight:'bold'}}>$190</Text>
-            <Text style={{backgroundColor:'#FFEBF0',color:'#FF6905',fontSize:14,marginLeft:5,padding:2,borderRadius:20}}>16 hours</Text>
-          </View>
-        </View>
-        <Text></Text>
-    </View>
-  );
+      <View style={styles.track}>
+      <LinearGradient start={{x:0,y:1}} end={{x:0.8,y:0.2}} style={[styles.bar,{width:`${progress}%`}]} colors={['#3D5CFF','#3D5CFF']}>
+                </LinearGradient>
+      </View>
+      </View>
+  </Pressable>
 }
 
 const styles = StyleSheet.create({
@@ -96,75 +80,44 @@ const styles = StyleSheet.create({
     flexDirection:'row',
     justifyContent:'space-between',
     alignItems:'center',
-    marginTop:"5%"
-  },
-  search:{
-    flexDirection:'row',
-    alignItems:'center',
-    justifyContent:'space-between',
-    marginTop:15,
-    backgroundColor:'#F4F3FD',
+    marginTop:"5%",
+    padding:10
+  },messageModelContainer:{
     width:'100%',
-    height:48,
-    padding:14,
-    borderRadius:10
-  },
-  searchField:{
-    width:'70%',
-    color:'#B8B8D2'
-  },
-  filters:{
     alignItems:'center',
-    flexDirection:'row',
-    justifyContent:'space-between',
-    width:'80%'
+    marginTop:5
   },
-  filterCont:{
-    alignItems:'center',
-    justifyContent:'center',
-    width:73,
-    height:28,
-    borderRadius:100
-  },
-  text:{
-    color:'#858597',
-    fontSize:14
-  },
-  CourseContainer:{
+  wrapper:{
     width:'100%',
-    height:100,
-    backgroundColor:'#ffffff',
-    marginBottom:15,
+    height:110,
     borderRadius:15,
-    shadowOpacity: 1,
-    shadowColor:'gray',
-    elevation: 5,
-    flexDirection:'row',
-    alignItems:'center',
+    shadowOpacity: 0.55,
+    elevation: 10,
+    backgroundColor:'#ffffff',
+    marginVertical:5,
     padding:10,
-    justifyContent:'space-between'
-  },
-  image:{
-    width:'110%',
-    height:'110%',
-  },
-  imageContainer:{
-    width:70,
-    height:70,
-    borderRadius:10,
-    overflow:'hidden'
-  },
-  courseDetails:{
-    width:'60%',
+    shadowColor:'gray',
     
-  },
-  writer:{
-    flexDirection:'row',
-    alignItems:'center',
-    marginVertical:3
-  },
-  priceContainer:{
-    flexDirection:'row',
-    alignItems:'center'
-  }
+},
+vidIcon:{
+  backgroundColor:'#3D5CFF',
+  width:44,
+  height:44,
+  borderRadius:100,
+  alignItems:'center',
+  justifyContent:'center'
+},
+track:{
+  width:'100%',
+  backgroundColor:'#F4F7FD',
+  height:4,
+  marginTop:10,
+  borderRadius:10,
+  overflow:'hidden'
+},
+bar:{
+  height:'100%',
+  borderRadius:10,
+  height:4
+},
 })
